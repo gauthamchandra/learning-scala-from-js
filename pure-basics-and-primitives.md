@@ -1,8 +1,10 @@
-# Basic Primitive Types and other Basics:
+# Primitive Types and other Basics:
 
 ## Semicolons
 
 Semicolons are not necessary in Scala and are discouraged unless you want to define multiple statements of code onto 1 line (but this is considered a bad practice).
+
+## Declaring Variables
 
 To declare a variable, use:
 
@@ -28,7 +30,7 @@ x = 5 // <= This will throw an error by the compiler as you cannot change the va
 
 ## The Primitive Types:
 
-They are `String`, `Char`, `Boolean`, `Double`, `Float`, `Int`, Short`, `Long`, `Byte`. 
+They are `String`, `Char`, `Boolean`, `Double`, `Float`, `Int`, `Short`, `Long`, `Byte`. 
 
 There are also `Any`, `AnyRef`, `AnyVal`, `Nothing`, `Null`, `null`, and `Unit` but these are better explained in subsequent sections. 
 
@@ -48,4 +50,31 @@ val by: Byte = 3					// 8 bit signed integer. No real equivalent in JS. Not ofte
 
 For full details, please see [the official docs](https://docs.scala-lang.org/tour/unified-types.html) as well as the [Java Primitive types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) (as Scala runs on the JVM and therefore supports the same types as Java)
 
+## String Interpolation
 
+In Javascript, you would use the `\`` instead of `'` or `"` like so:
+
+```javascript
+const num = 3;
+
+const str = `Billy kicked the ball ${num} times`;
+```
+
+In Scala, there are 3 ways to interpolate strings:
+
+* the `s` formatter (aka. standard string interplation)
+* the `f` formatter (aka. the "printf" style string interpolation)
+* the `raw` formatter (aka. the same as the `s` formatter but doesn't escape anything)
+* The old fashioned way using "+" operator.
+
+```scala
+val num = 3
+
+s"Billy kicked the ball\n$num times"       // => "Billy kicked the ball
+                                           //     3 times"
+f"Billy kicked the ball\n$num%d times"     // => "Billy kicked the ball
+                                           //     3 times"
+raw"Billy kicked the ball\n$num times"     // => "Billy kicked the ball\n3 times"
+```
+
+For more details, see the [official docs](https://docs.scala-lang.org/overviews/core/string-interpolation.html)
