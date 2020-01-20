@@ -37,7 +37,7 @@ def printSomething(str: String): Unit = println(str)
 
 Invoking the `add` function defined above is simply done with parentheses (like in JS): `add(3, 5)` 
 
-**NOTE**: Invoking functions with parameters is a little different:
+**NOTE**: Invoking functions with NO parameters is a little different:
 
 ```scala
 def sayHello() {
@@ -46,6 +46,7 @@ def sayHello() {
 
 sayHello()  // invoking function. Returns "()" aka. "Unit" type.
 sayHello    // also invoking function and the same result as the above statement!
+            // This only works because its a function with 0 arguments.
 ```
 
 ## Functions within Functions
@@ -65,9 +66,9 @@ someCalculation(3, 4) // => 19
 
 ## Recursive Functions
 
-**IMPORTANT**: Although this will be _super_ weird at first, whenever you feel the need to reach for while loops...don't. Use recursive functions instead. [This StackOverflow post says it best](https://stackoverflow.com/questions/18674743/is-there-any-advantage-to-avoiding-while-loops-in-scala)
+**IMPORTANT**: Although this will be _super_ weird at first, whenever you feel the need to reach for while loops...DON'T. Use recursive functions instead. [This StackOverflow post says it best](https://stackoverflow.com/questions/18674743/is-there-any-advantage-to-avoiding-while-loops-in-scala)
 
-Unlike normal functions, the compiler cannot infer the return types of recursive functions. So this should be explicitly specified (as in best practice anyway) 
+Unlike normal functions, the compiler cannot infer the return types of recursive functions. So this should be explicitly specified (as is best practice anyway) 
 
 ```scala
 def say(str: String, times: Int): String = {

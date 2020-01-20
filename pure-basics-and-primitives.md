@@ -14,7 +14,7 @@ var y: Int = 3 // in Scala, you can explicitly give a type to a variable (like i
 
 x = 5 // no error
 y = 5 // no error
-y = "Hello" // <= Error because we told the commpiler that y can only be an integer! 
+y = "Hello" // <= Error because we told the compiler that y can only be an integer! 
 ```
 
 In the example above, the declarations for `x` and `y` are functionally equivalent but specifying a type tells the compiler that it can _only_ be of that type. If you do not specify a type, the compiler will try to infer the type (like in TypeScript or Flow).
@@ -52,7 +52,7 @@ For full details, please see [the official docs](https://docs.scala-lang.org/tou
 
 ## String Interpolation
 
-In Javascript, you would use the `\`` instead of `'` or `"` like so:
+In Javascript, you would use the backtick "`" instead of `'` or `"` like so:
 
 ```javascript
 const num = 3;
@@ -65,7 +65,6 @@ In Scala, there are 3 ways to interpolate strings:
 * the `s` formatter (aka. standard string interplation)
 * the `f` formatter (aka. the "printf" style string interpolation)
 * the `raw` formatter (aka. the same as the `s` formatter but doesn't escape anything)
-* The old fashioned way using "+" operator.
 
 ```scala
 val num = 3
