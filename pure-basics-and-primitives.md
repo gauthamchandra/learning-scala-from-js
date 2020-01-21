@@ -48,9 +48,11 @@ val l: Long = 48949483L	// similar to Int but is 64 bit signed integer so it can
 val by: Byte = 3					// 8 bit signed integer. No real equivalent in JS. Not often used but useful when trying to save memory. 
 ```
 
-For full details, please see [the official docs](https://docs.scala-lang.org/tour/unified-types.html) as well as the [Java Primitive types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) (as Scala runs on the JVM and therefore supports the same types as Java)
+For full details, please see [the official docs](https://docs.scala-lang.org/tour/unified-types.html) as well as the [Java Primitive types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) (as Scala runs on the JVM and therefore supports the types found in Java)
 
-## String Interpolation
+## Basic Operations
+
+### String Interpolation
 
 In Javascript, you would use the backtick "`" instead of `'` or `"` like so:
 
@@ -63,7 +65,7 @@ const str = `Billy kicked the ball ${num} times`;
 In Scala, there are 3 ways to interpolate strings:
 
 * the `s` formatter (aka. standard string interplation)
-* the `f` formatter (aka. the "printf" style string interpolation)
+* the `f` formatter (aka. the "printf" style string interpolation with type enforcement)
 * the `raw` formatter (aka. the same as the `s` formatter but doesn't escape anything)
 
 ```scala
@@ -77,3 +79,55 @@ raw"Billy kicked the ball\n$num times"     // => "Billy kicked the ball\n3 times
 ```
 
 For more details, see the [official docs](https://docs.scala-lang.org/overviews/core/string-interpolation.html)
+
+### Arrays 
+
+**IMPORTANT**: In Javascript, arrays aren't exactly "just" arrays. In traditional languages like Java or Scala, Arrays are fixed length so adding to the array invovles:
+
+1. creating a new, bigger array,
+2. copying all the old values to the new array
+3. and then setting the new value in the right index of the new array.
+
+This means creating a new array is traditionally an O(n) operation.
+
+By Java/Scala standards, Javascript cheats by making an Array that is _technically_ ALL of the following:
+
+* a [Linked List](https://en.wikipedia.org/wiki/Linked_list) - because it dynamically grows the array for you when you add to it)
+* a [Stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) - due to its `push`/`pop` methods.
+* a [Queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) - as you can `push` new items and then `shift()` them from the front,
+
+Each of these individual types is available in Scala as well as the traditional "Array". These notes won't delve into how to use each one and I recommend reading the Scala docs for that.
+
+#### Basic Operations
+
+```scala
+val arr: Array = Array(1, 2, 3) // equivalent to "const arr = [1, 2, 3];" in JS
+val list: List = List(1, 2, 3)  // equivalent to "const list = [1, 2, 3];" in JS
+
+List.fill(3)("Hello") // equivalent to: List("Hello", "Hello", "Hello")
+
+list.isEmpty      // => false 
+list.head         // => 1
+list.tail         // => 3
+
+list :+ 11        // => List(1, 2, 3, 11). The result is a new list, the original is unmodified.
+                  // Equivalent to [...list, 11] in JS
+
+25 +: list        // => List(25, 1, 2, 3). The result is a new list, the original is unmodified
+                  // Equivalent to [25, ...list]  
+
+list.contains(4)  // => false
+
+list(2)           // => 3. Equivalent to list[2]
+```
+
+So a few things to note here:
+
+* You might have noticed that **accessing arrays and lists utilize parentheses, NOT brackets**. This is because, just like in the Ruby programming language, _EVERYTHING_ in Scala is an object.  So when you want to access the 3rd item in a list, you use parentheses because you are _literally_ calling a method to access the value.
+* [What's the difference between Array and List?](https://stackoverflow.com/questions/2712877/difference-between-array-and-list-in-scala)
+
+#### Mutable Lists through `ArrayBuffer` and `ListBuffer`
+
+`List`s are **IMMUTABLE** in Scala. Methods invoked on a List to modify it will return a new list. The original is always unchanged! 
+
+If we need a mutable list, then an `ArrayBuffer` or `ListBuffer` should be used.
