@@ -14,3 +14,4 @@ The notes are meant to be followed in this specific order:
 1. [Pure Basics and Primitive Types](pure-basics-and-primitives.md)
 2. [Looping and Control Expressions](looping-and-control-expressions.md)
 3. [Functions and Recursion](functions.md)
+4. [Classes](classes.md)
