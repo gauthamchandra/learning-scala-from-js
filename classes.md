@@ -318,3 +318,56 @@ app.doSomeThing()
 This actually doesn't throw an error even though the same name is being used for both. That's because Scala is smart enough to know which one you refer to (works the same way as in Kotlin).
 
 Since the object class is located in the same file as the regular class, they are considered **Companion Objects**.
+
+## Case classes
+
+Case classes are just nice syntactic sugar on top of regular classes. They do the following:
+
+1. They automatically expose all constructor arguments as public instance variables
+2. They provide an overrided `toString()` method for easier debugging.
+3. They automatically provide implementations for `equals()`, and `hashCode()` out of the box so that field by field comparisons can be done easily and effectively.
+4. They provide an easy to use `copy()` method which returns a new instance with the fields equivalent to the old object 
+5. They provide an apply method that allows you to construct the instance without the "new" keyword.
+6. They are `Serializable` by default (i.e it implements the `Serializable` trait)
+7. They have extractor patterns that are used in pattern matching (explained in later sections) 
+
+They are defined as follows:
+
+Let's cover each one in more detail:
+
+```scala
+// case classes have the "case" prefix
+case class Person(name: String, age: Int) 
+
+// this is equivalent to the following:
+//  class Person(val name: String, val age: Int) {
+//    override def toString: String = s"Person($name,$age)"
+//  }
+
+// you can even have case object classes
+case object Bob {
+  def name = "Bob"
+}
+
+val person = new Person("Bob", 39)
+val similarPerson = new Person("Bob", 39)
+
+// can access constructor args immediately without val thanks to it being a case class
+println(person.age)              // => 39
+
+// nice debug output thanks to overriden toString() method
+println(person)                  // => "Person(Bob,39)"
+
+// thanks to the overriden equals() method, it does a field by field comparison 
+println(person == similarPerson) // => true
+
+// returns me a new instance with the individual fields being equal in value
+// to the original
+println(person.copy())           // => "Person(Bob,39)"
+
+// can even override certain fields in copy()
+println(person.copy(age = 44))   // => "Person(Bob,44)"
+
+// can use the apply method so that we can skip the "new" keyword
+val joe = Person("Joe", 21)
+```
