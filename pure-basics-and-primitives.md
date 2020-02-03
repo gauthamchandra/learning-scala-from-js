@@ -32,8 +32,6 @@ x = 5 // <= This will throw an error by the compiler as you cannot change the va
 
 They are `String`, `Char`, `Boolean`, `Double`, `Float`, `Int`, `Short`, `Long`, `Byte`. 
 
-There are also `Any`, `AnyRef`, `AnyVal`, `Nothing`, `Null`, `null`, and `Unit` but these are better explained in subsequent sections. 
-
 ```scala
 val str: String = "Foo" // Same as JS's "String" type. Strings are ALWAYS double quoted.
 val c: Char = 'C' 			// Represents a single character in a string. Chars are ALWAYS single quoted.
@@ -47,6 +45,8 @@ val l: Long = 48949483L	// similar to Int but is 64 bit signed integer so it can
 												// Note the 'L' suffixed at the end. This tells the compiler its a long. Otherwise, its treated as an int!
 val by: Byte = 3					// 8 bit signed integer. No real equivalent in JS. Not often used but useful when trying to save memory. 
 ```
+
+There are also `Any`, `AnyRef`, `AnyVal`, `Nothing`, `Null`, `null`, and `Unit` but these are better explained in subsequent sections. 
 
 For full details, please see [the official docs](https://docs.scala-lang.org/tour/unified-types.html) as well as the [Java Primitive types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) (as Scala runs on the JVM and therefore supports the types found in Java)
 

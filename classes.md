@@ -249,3 +249,72 @@ foo.apply
 // use this shorthand to call the instance like a function!
 foo() // <= this is only possible because you defined the apply() method
 ```
+
+## Object classes
+
+In ES6 JavaScript, there's a concept of "static" properties on classes and they are usually defined like this:
+
+```javascript
+class ApplicationConfig {
+  static isFeatureEnabled(featureName) {
+    return false;
+  }
+}
+
+ApplicationConfig.someStaticProperty = 3;
+
+// then you access them like this:
+console.log(ApplicationConfig.isFeatureEnabled('teleportation'));
+console.log(ApplicationConfig.someStaticProperty);
+```
+
+In Scala, instead of defining a "static" property on a regular class, they are defined in an **object** class:
+
+```scala
+object ApplicationConfig {
+  val someStaticProperty = 3
+
+  def isFeatureEnabled(featureName: String) = false
+
+  println("I can also add any arbitrary code here and it gets executed!")
+}
+
+// called the same way as before
+ApplicationConfig.someStaticProperty
+ApplicationConfig.isFeatureEnabled
+```
+
+Because object classes are meant to have their properties used directly, **they have no constructor. They act as [singletons](https://en.wikipedia.org/wiki/Singleton_pattern)**.
+
+### Companions: Mixing static and instance expressions 
+
+What if you want a class to have both instance variables AND static variables?
+
+In Scala, you can do this:
+
+```scala
+// put all static stuff here
+// This is now shared between all instances of Application
+object Application {
+  val key = "X"
+  def isUserAGoat() = false
+}
+
+// put all your instance level logic here
+class Application {
+  def doSomeThing(): Unit = {
+    // some code
+  }
+}
+
+// Then access it like so:
+Application.key
+Application.isUserAGoat
+
+val app = new Application
+app.doSomeThing()
+```
+
+This actually doesn't throw an error even though the same name is being used for both. That's because Scala is smart enough to know which one you refer to (works the same way as in Kotlin).
+
+Since the object class is located in the same file as the regular class, they are considered **Companion Objects**.
