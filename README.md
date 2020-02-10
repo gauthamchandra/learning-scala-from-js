@@ -17,4 +17,5 @@ The notes are meant to be followed in this specific order:
 4. [Classes](classes.md)
 5. [Inheritance](inheritance.md)
 6. [Generics](generics.md)
-7. [Package Objects](package_objects.md)
+7. [Throwing and Catching Exceptions](exceptions.md)
+8. [Package Objects](package_objects.md)
